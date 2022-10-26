@@ -9,22 +9,22 @@
 		<title> Professor Layton Music Library </title>
 	</head>
 	<body>
-		<script src="musicLibrary.js"></script>
 		<div id="grid">
 			<div class="nav-bar">
+				<h2> Albums </h2>
 				<ul>
 					<li>
-						<button class="nav-button" onclick="switchImg(1)">
+						<button class="nav-button" onclick="switchAlbum(1)">
 							Professor Layton & the Curious Village
 						</button>
 					</li>
 					<li>
-						<button class="nav-button" onclick="switchImg(2)">
+						<button class="nav-button" onclick="switchAlbum(2)">
 							Professor Layton & the Diabolical Box
 						</button>
 					</li>
 					<li>
-						<button class="nav-button" onclick="switchImg(3)">
+						<button class="nav-button" onclick="switchAlbum(3)">
 							Professor Layton & the Unwound Future
 						</button>
 					</li>
@@ -33,7 +33,7 @@
 			<div class="album">
 				<h2 id="album-name"> Professor Layton & the Curious Village </h2>
 				<div><img id="cover" src="./images/curious_village.jpg" /></div>
-				<ul class="title">
+				<ul class="track-list">
 					<li>
 						<button onclick="playAudio('song1')">
 							<span class="material-symbols-outlined"> play_arrow </span>
@@ -41,7 +41,7 @@
 						<audio id="song1">
 							<source src="./audio/Unwound_Future/The Lost Future.mp3" type="audio/mp3" />
 						</audio>
-						song 1 1:57
+						<h5 id="track1"> Professor Layton's Theme (Live Version) </h5>
 					</li>
 					<li>
 						<button onclick="playAudio('song2')">
@@ -50,7 +50,7 @@
 						<audio id="song2">
 							<source src="./audio/Unwound_Future/Sorrow.mp3" type="audio/mp3" />
 						</audio>
-						song 2
+						<h5 id="track2"> About Town </h5>
 					</li>
 					<li>
 						<button onclick="playAudio('song3')">
@@ -59,14 +59,31 @@
 						<audio id="song3">
 							<source src="./audio/Unwound_Future/Time Travel JP.mp3" type="audio/mp3" />
 						</audio>
-						song 3
+						<h5 id="track3"> End Theme </h5>
 					</li>
 				</ul>
 			</div>
 			<div class="music-player">
-				<div class="album-img"></div>
-				<h3 class="title"> Song Title </h3>
+				<icon class="album-img" src="./images/curious_village.jpg"></icon>
+				<h3 class="song-title"> Professor Layton's Theme (Live) </h3>
+				<div class="slider_container">
+					<div class="current-time">00:00</div>
+					<input type="range" min="1" max="100" value="0" class="seek_slider" onchange="seekTo()" />
+					<div class="total-duration">00:00</div>
+				</div>
+				<div class="buttons">
+					<div class="prev-track" onclick="prevTrack()">
+						<span class="material-symbols-outlined"> skip_previous </span>
+					</div>
+					<div class="playPause-track" onclick="playPauseTrack()">
+						<span class="material-symbols-outlined"> play_circle </span>
+					</div>
+					<div class="next-track" onclick="nextTrack()">
+						<span class="material-symbols-outlined"> skip_next </span>
+					</div>
+				</div>
 			</div>
 		</div>
+		<script src="musicLibrary.js"></script>
 	</body>
 </html>
