@@ -36,7 +36,7 @@
 				<ul class="track-list">
 					<li>
 						<button onclick="playAudio('song1')">
-							<span class="material-symbols-outlined"> play_arrow </span>
+							<span class="material-symbols-outlined"> play_circle </span>
 						</button>
 						<audio id="song1">
 							<source src="./audio/Unwound_Future/The Lost Future.mp3" type="audio/mp3" />
@@ -45,7 +45,7 @@
 					</li>
 					<li>
 						<button onclick="playAudio('song2')">
-							<span class="material-symbols-outlined"> play_arrow </span>
+							<span class="material-symbols-outlined"> play_circle </span>
 						</button>
 						<audio id="song2">
 							<source src="./audio/Unwound_Future/Sorrow.mp3" type="audio/mp3" />
@@ -54,8 +54,9 @@
 					</li>
 					<li>
 						<button onclick="playAudio('song3')">
-							<span class="material-symbols-outlined"> play_arrow </span>
+							<span class="material-symbols-outlined"> play_circle </span>
 						</button>
+
 						<audio id="song3">
 							<source src="./audio/Unwound_Future/Time Travel JP.mp3" type="audio/mp3" />
 						</audio>
@@ -65,7 +66,7 @@
 			</div>
 			<div class="music-player">
 				<icon class="album-img" src="./images/curious_village.jpg"></icon>
-				<h3 class="song-title"> Professor Layton's Theme (Live) </h3>
+				<h4 class="song-title"> Professor Layton's Theme (Live) </h4>
 				<div class="slider_container">
 					<div class="current-time">00:00</div>
 					<input type="range" min="1" max="100" value="0" class="seek_slider" onchange="seekTo()" />
