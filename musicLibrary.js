@@ -118,9 +118,19 @@ let curiousVillage = [
 		path: "./audio/Curious_Village/Professor Layton's Theme (Live).mp3",
 	},
 	{
+		name: "Puzzles",
+		img: "",
+		path: "./audio/Curious_Village/Puzzles.mp3",
+	},
+	{
 		name: "About Town",
 		img: "",
 		path: "./audio/Curious_Village/About Town.mp3",
+	},
+	{
+		name: "The Veil of Night",
+		img: "",
+		path: "./audio/Curious_Village/The Veil of Night.mp3",
 	},
 	{
 		name: "End Theme",
@@ -136,9 +146,19 @@ let diaBox = [
 		path: "./audio/Diabolical_Box/Theme of the Diabolical Box.mp3",
 	},
 	{
+		name: "Suspense",
+		img: "",
+		path: "./audio/Suspense.mp3",
+	},
+	{
 		name: "Folsense (Live)",
 		img: "",
 		path: "./audio/Diabolical_Box/Folsense (Live).mp3",
+	},
+	{
+		name: "To the Darkness",
+		img: "",
+		path: "./audio/Diabolical_Box/To the Darkness.mp3",
 	},
 	{
 		name: "Iris (Music Box Version)",
@@ -152,6 +172,16 @@ let unwoundFuture = [
 		name: "The Lost Future",
 		img: "",
 		path: "./audio/Unwound_Future/The Lost Future.mp3",
+	},
+	{
+		name: "Puzzle Battle",
+		img: "",
+		path: "./audio/Unwound_Future/Puzzle Battle.mp3",
+	},
+	{
+		name: "Don Paolo's Theme",
+		img: "",
+		path: "./audio/Unwound_Future/Don Paolo's Theme.mp3",
 	},
 	{
 		name: "Sorrow",
@@ -193,7 +223,9 @@ function switchAlbum(num) {
 			document.getElementById("track1").innerHTML = curiousVillage[0].name;
 			document.getElementById("track2").innerHTML = curiousVillage[1].name;
 			document.getElementById("track3").innerHTML = curiousVillage[2].name;
-			document.getElementById("track1").style.backgroundColor = "#f3cf7f";
+			document.getElementById("track4").innerHTML = curiousVillage[3].name;
+			document.getElementById("track5").innerHTML = curiousVillage[4].name;
+			// document.getElementById("track1").style.backgroundColor = "#f3cf7f";
 			loadTrack(track_index);
 			break;
 		case 2:
@@ -203,7 +235,9 @@ function switchAlbum(num) {
 			document.getElementById("track1").innerHTML = diaBox[0].name;
 			document.getElementById("track2").innerHTML = diaBox[1].name;
 			document.getElementById("track3").innerHTML = diaBox[2].name;
-			document.getElementById("track2").style.backgroundColor = "#f3cf7f";
+			document.getElementById("track4").innerHTML = diaBox[3].name;
+			document.getElementById("track5").innerHTML = diaBox[4].name;
+			// document.getElementById("track2").style.backgroundColor = "#f3cf7f";
 			loadTrack(track_index);
 			break;
 		case 3:
@@ -213,7 +247,9 @@ function switchAlbum(num) {
 			document.getElementById("track1").innerHTML = unwoundFuture[0].name;
 			document.getElementById("track2").innerHTML = unwoundFuture[1].name;
 			document.getElementById("track3").innerHTML = unwoundFuture[2].name;
-			document.getElementById("track3").style.backgroundColor = "#f3cf7f";
+			document.getElementById("track4").innerHTML = unwoundFuture[3].name;
+			document.getElementById("track5").innerHTML = unwoundFuture[4].name;
+			// document.getElementById("track3").style.backgroundColor = "#f3cf7f";
 			loadTrack(track_index);
 	}
 	console.log("clicked");
@@ -249,6 +285,14 @@ function loadTrack(track_index) {
 	// Move to the next track if the current finishes playing
 	// using the 'ended' event
 	curr_track.addEventListener("ended", nextTrack);
+
+	// if (track_index == 0) {
+	// 	querySelector(".track-list :nth-child(0)").style.backgroundColor = "#f3cf7f";
+	// } else if (track_index == 1) {
+	// 	querySelector(".track-list :nth-child(1)").style.backgroundColor = "#f3cf7f";
+	// } else if (track_index == 2) {
+	// 	querySelector(".track-list :nth-child(2)").style.backgroundColor = "#f3cf7f";
+	// }
 }
 
 // Function to reset all values to their default
@@ -290,6 +334,12 @@ function nextTrack() {
 	else track_index = 0;
 
 	// Load and play the new track
+	loadTrack(track_index);
+	playTrack();
+}
+
+function jumpTrack(index) {
+	track_index = index;
 	loadTrack(track_index);
 	playTrack();
 }

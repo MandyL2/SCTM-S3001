@@ -32,35 +32,52 @@
 			</div>
 			<div class="album">
 				<h2 id="album-name"> Professor Layton & the Curious Village </h2>
-				<div><img id="cover" src="./images/curious_village.jpg" /></div>
+				<div><img class="cover" src="./images/curious_village.jpg" /></div>
 				<ul class="track-list">
 					<li>
-						<button onclick="playAudio('song1')">
+						<button onclick="jumpTrack(0)">
 							<span class="material-symbols-outlined"> play_circle </span>
 						</button>
-						<audio id="song1">
+						<!-- <audio id="song1">
 							<source src="./audio/Unwound_Future/The Lost Future.mp3" type="audio/mp3" />
-						</audio>
+						</audio> -->
 						<h5 id="track1"> Professor Layton's Theme (Live Version) </h5>
 					</li>
 					<li>
-						<button onclick="playAudio('song2')">
+						<button onclick="jumpTrack(1)">
 							<span class="material-symbols-outlined"> play_circle </span>
 						</button>
-						<audio id="song2">
-							<source src="./audio/Unwound_Future/Sorrow.mp3" type="audio/mp3" />
-						</audio>
-						<h5 id="track2"> About Town </h5>
+						<!-- <audio id="3">
+							<source src="./audio/Unwound_Future/Time Travel JP.mp3" type="audio/mp3" />
+						</audio> -->
+						<h5 id="track2"> Puzzles </h5>
 					</li>
 					<li>
-						<button onclick="playAudio('song3')">
+						<button onclick="jumpTrack(2)">
 							<span class="material-symbols-outlined"> play_circle </span>
 						</button>
-
-						<audio id="song3">
+						<!-- <audio id="song3">
+							<source src="./audio/Unwound_Future/Sorrow.mp3" type="audio/mp3" />
+						</audio> -->
+						<h5 id="track3"> About Town </h5>
+					</li>
+					<li>
+						<button onclick="jumpTrack(3)">
+							<span class="material-symbols-outlined"> play_circle </span>
+						</button>
+						<!-- <audio id="song4">
 							<source src="./audio/Unwound_Future/Time Travel JP.mp3" type="audio/mp3" />
-						</audio>
-						<h5 id="track3"> End Theme </h5>
+						</audio> -->
+						<h5 id="track4"> The Veil of Night </h5>
+					</li>
+					<li>
+						<button onclick="jumpTrack(4)">
+							<span class="material-symbols-outlined"> play_circle </span>
+						</button>
+						<!-- <audio id="song5">
+							<source src="./audio/Unwound_Future/Time Travel JP.mp3" type="audio/mp3" />
+						</audio> -->
+						<h5 id="track5"> End Theme </h5>
 					</li>
 				</ul>
 			</div>
