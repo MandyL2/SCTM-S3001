@@ -14,17 +14,17 @@
 				<h2> Albums </h2>
 				<ul>
 					<li>
-						<button class="nav-button" onclick="switchAlbum(1)">
+						<button class="nav-button" onclick="switchAlbum(playlist1, curiousVillage)">
 							Professor Layton & the Curious Village
 						</button>
 					</li>
 					<li>
-						<button class="nav-button" onclick="switchAlbum(2)">
+						<button class="nav-button" onclick="switchAlbum(playlist2, diaBox)">
 							Professor Layton & the Diabolical Box
 						</button>
 					</li>
 					<li>
-						<button class="nav-button" onclick="switchAlbum(3)">
+						<button class="nav-button" onclick="switchAlbum(playlist3, unwoundFuture)">
 							Professor Layton & the Unwound Future
 						</button>
 					</li>
@@ -32,8 +32,8 @@
 			</div>
 			<div class="album">
 				<h2 id="album-name"> Professor Layton & the Curious Village </h2>
-				<div><img class="cover" src="./images/curious_village.jpg" /></div>
-				<ul class="track-list">
+				<div><img id="cover" src="./images/curious_village.jpg" /></div>
+				<ul id="track-list">
 					<li>
 						<button onclick="jumpTrack(0)">
 							<span class="material-symbols-outlined"> play_circle </span>

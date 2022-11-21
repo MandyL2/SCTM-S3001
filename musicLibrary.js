@@ -11,7 +11,8 @@
  * 3 songs each album
  * sidebar nav
  *
- * reference: https://www.geeksforgeeks.org/create-a-music-player-using-javascript/
+ * references: https://www.geeksforgeeks.org/create-a-music-player-using-javascript/
+ * https://github.com/OrionJoshi/Music_Player_Using_LinkedList
  */
 
 class Utils {
@@ -20,180 +21,181 @@ class Utils {
 	}
 }
 
-function linkedList() {
-	let head = null;
-	let length = 0;
-	class LinkedList {
-		append(element) {
-			const newItem = Utils.node(element);
-			if (this.isEmpty()) {
-				head = newItem;
-			} else {
-				let currentLastItem = head;
-				while (currentLastItem.next != null) {
-					currentLastItem = currentLastItem.next;
-				}
-				currentLastItem.next = newItem;
-			}
-			length++;
-		}
-
-		insert(position, element) {
-			if (position < 0 || position > length) {
-				throw new Error("Invalid position");
-			}
-			const newNode = Utils.node(element);
-
-			if (position === 0) {
-				newNode.next = head;
-				head = newNode;
-			} else {
-				let previousNode = head;
-				let nextNode = head.next;
-				let currentNode = head;
-				let currentPosition = 0;
-				while (currentPosition++ < position) {
-					previousNode = currentNode;
-					nextNode = currentNode.next;
-					currentNode = currentNode.next;
-				}
-				previousNode.next = newNode;
-				newNode.next = nextNode;
-			}
-			length++;
-			return true;
-		}
-
-		indexOf(element) {
-			if (this.isEmpty()) {
-				throw new Error("The linked list is empty");
-			}
-			for (
-				let currentItem = head, positionItem = 0;
-				currentItem !== null;
-				currentItem = currentItem.next, positionItem++
-			) {
-				if (currentItem.element === element) {
-					return positionItem;
-				}
-			}
-			return -1;
-		}
-
-		getHead() {
-			return head;
-		}
-	}
-
-	class Node {
-		constructor(element) {
-			this.element = element;
-			this.next = null;
-		}
+class Node {
+	constructor(name, path) {
+		this.musicNode = {
+			name: name,
+			path: path,
+		};
+		this.prev = null;
+		this.next = null;
 	}
 }
 
-// class Node {
-// 	constructor(name, path) {
-// 		this.musicNode = {
-// 			name: name,
-// 			path: path,
-// 		};
-// 		this.prev = null;
-// 		this.next = null;
-// 	}
-// }
-
-class Playlist {
+class DoubleLinkedList {
 	constructor() {
-		this._length = 0;
 		this.head = null;
+		this.tail = null;
+		this.length = 0;
+		this.tempPos = null;
+		this.index = 0;
+		this.tempIndex = 0;
+	}
+
+	insert(name, path) {
+		const newNode = new Node(name, path);
+
+		if (this.length === 0) {
+			this.head = newNode;
+			this.tail = newNode;
+		} else {
+			this.tail.next = newNode;
+			newNode.prev = this.tail;
+			this.tail = newNode;
+		}
+		this.length++;
+	}
+
+	get(index) {
+		if (index < 0 || index >= this.length) {
+			return null;
+		} else {
+			if (index < this.index) {
+				let counter = this.index;
+				while (counter > index) {
+					this.tempPos = this.tempPos.prev;
+					counter -= 1;
+					console.log(this.tempPos);
+				}
+			} else {
+				let counter = 0;
+				while (counter < index && this.tempPos.next != null) {
+					this.tempPos = this.tempPos.next;
+					counter += 1;
+					console.log(this.tempPos);
+				}
+			}
+			this.index = index;
+			return this.tempPos;
+		}
+	}
+
+	setDefaultPointer() {
+		this.tempPos = this.head;
+	}
+
+	traverse(direction) {
+		// let tempPos;
+		if (direction == 1 && this.tempPos.next != null) {
+			this.tempPos = this.tempPos.next;
+			this.index++;
+			console.log(this.tempPos);
+			return this.tempPos.musicNode;
+		} else if (direction == -1 && this.tempPos.prev != null) {
+			this.tempPos = this.tempPos.prev;
+			this.index--;
+			console.log(this.tempPos);
+			return this.tempPos.musicNode;
+		} else {
+			return 0;
+		}
 	}
 }
 
 let curiousVillage = [
+	"/images/curious_village.jpg",
+	"Professor Layton and the Curious Village",
 	{
 		name: "Professor Layton's Theme (Live)",
-		img: "",
-		path: "./audio/Curious_Village/Professor Layton's Theme (Live).mp3",
+		path: "/audio/Curious_Village/Professor Layton's Theme (Live).mp3",
 	},
 	{
 		name: "Puzzles",
-		img: "",
-		path: "./audio/Curious_Village/Puzzles.mp3",
+		path: "/audio/Curious_Village/Puzzles.mp3",
 	},
 	{
 		name: "About Town",
-		img: "",
-		path: "./audio/Curious_Village/About Town.mp3",
+		path: "/audio/Curious_Village/About Town.mp3",
 	},
 	{
 		name: "The Veil of Night",
-		img: "",
-		path: "./audio/Curious_Village/The Veil of Night.mp3",
+		path: "/audio/Curious_Village/The Veil of Night.mp3",
 	},
 	{
 		name: "End Theme",
-		img: "",
-		path: "./audio/Curious_Village/End Theme.mp3",
+		path: "/audio/Curious_Village/End Theme.mp3",
 	},
 ];
 
 let diaBox = [
+	"/images/diabolical_box.jpg",
+	"Professor Layton and the Diabolical Box",
 	{
 		name: "Theme of the Diabolical Box",
-		img: "",
-		path: "./audio/Diabolical_Box/Theme of the Diabolical Box.mp3",
+		path: "/audio/Diabolical_Box/Theme of the Diabolical Box.mp3",
 	},
 	{
 		name: "Suspense",
-		img: "",
-		path: "./audio/Suspense.mp3",
+		path: "/audio/Diabolical_Box/Suspense.mp3",
 	},
 	{
 		name: "Folsense (Live)",
-		img: "",
-		path: "./audio/Diabolical_Box/Folsense (Live).mp3",
+		path: "/audio/Diabolical_Box/Folsense (Live).mp3",
 	},
 	{
 		name: "To the Darkness",
-		img: "",
-		path: "./audio/Diabolical_Box/To the Darkness.mp3",
+		path: "/audio/Diabolical_Box/To the Darkness.mp3",
 	},
 	{
 		name: "Iris (Music Box Version)",
-		img: "",
-		path: "./audio/Diabolical_Box/iris_Music Box.mp3",
+		path: "/audio/Diabolical_Box/iris_Music Box.mp3",
 	},
 ];
 
 let unwoundFuture = [
+	"/images/unwound_future.jpg",
+	"Professor Layton and the Unwound Future",
 	{
 		name: "The Lost Future",
-		img: "",
-		path: "./audio/Unwound_Future/The Lost Future.mp3",
+		path: "/audio/Unwound_Future/The Lost Future.mp3",
 	},
 	{
 		name: "Puzzle Battle",
-		img: "",
-		path: "./audio/Unwound_Future/Puzzle Battle.mp3",
+		path: "/audio/Unwound_Future/Puzzle Battle.mp3",
 	},
 	{
 		name: "Don Paolo's Theme",
-		img: "",
-		path: "./audio/Unwound_Future/Don Paolo's Theme.mp3",
+		path: "/audio/Unwound_Future/Don Paolo's Theme.mp3",
 	},
 	{
 		name: "Sorrow",
-		img: "",
-		path: "./audio/Unwound_Future/Sorrow.mp3",
+		path: "/audio/Unwound_Future/Sorrow.mp3",
 	},
 	{
 		name: "Time Travel (Japanese)",
-		img: "",
-		path: "./audio/Unwound_Future/Time Travel JP.mp3",
+		path: "/audio/Unwound_Future/Time Travel JP.mp3",
 	},
 ];
+
+const playlist1 = new DoubleLinkedList();
+for (let i = 2; i < curiousVillage.length; i++) {
+	playlist1.insert(curiousVillage[i].name, curiousVillage[i].path);
+}
+
+const playlist2 = new DoubleLinkedList();
+for (let i = 2; i < diaBox.length; i++) {
+	playlist2.insert(diaBox[i].name, diaBox[i].path);
+}
+
+const playlist3 = new DoubleLinkedList();
+for (let i = 2; i < unwoundFuture.length; i++) {
+	playlist3.insert(unwoundFuture[i].name, unwoundFuture[i].path);
+}
+
+playlist1.setDefaultPointer();
+playlist2.setDefaultPointer();
+playlist3.setDefaultPointer();
+console.log(playlist1);
 
 let playpause_btn = document.querySelector(".playPause-track");
 let next_btn = document.querySelector(".next-track");
@@ -207,52 +209,23 @@ let total_duration = document.querySelector(".total-duration");
 // let isPlaying = true;
 
 //global variables
-let track_index = 0;
+let track_index = 1;
+let track_update;
 let isPlaying = false;
 let updateTimer;
-let track_list = curiousVillage;
+let track_list = playlist1;
 
 let curr_track = document.createElement("audio");
+curr_track.src = track_list.head.musicNode.path;
 
-function switchAlbum(num) {
-	switch (num) {
-		case 1:
-			track_list = curiousVillage;
-			document.getElementById("cover").src = "./images/curious_village.jpg";
-			document.getElementById("album-name").innerHTML = "Professor Layton & the Curious Village";
-			document.getElementById("track1").innerHTML = curiousVillage[0].name;
-			document.getElementById("track2").innerHTML = curiousVillage[1].name;
-			document.getElementById("track3").innerHTML = curiousVillage[2].name;
-			document.getElementById("track4").innerHTML = curiousVillage[3].name;
-			document.getElementById("track5").innerHTML = curiousVillage[4].name;
-			// document.getElementById("track1").style.backgroundColor = "#f3cf7f";
-			loadTrack(track_index);
-			break;
-		case 2:
-			track_list = diaBox;
-			document.getElementById("cover").src = "./images/diabolical_box.jpg";
-			document.getElementById("album-name").innerHTML = "Professor Layton & the Diabolical Box";
-			document.getElementById("track1").innerHTML = diaBox[0].name;
-			document.getElementById("track2").innerHTML = diaBox[1].name;
-			document.getElementById("track3").innerHTML = diaBox[2].name;
-			document.getElementById("track4").innerHTML = diaBox[3].name;
-			document.getElementById("track5").innerHTML = diaBox[4].name;
-			// document.getElementById("track2").style.backgroundColor = "#f3cf7f";
-			loadTrack(track_index);
-			break;
-		case 3:
-			track_list = unwoundFuture;
-			document.getElementById("cover").src = "./images/unwound_future.jpg";
-			document.getElementById("album-name").innerHTML = "Professor Layton & the Unwound Future";
-			document.getElementById("track1").innerHTML = unwoundFuture[0].name;
-			document.getElementById("track2").innerHTML = unwoundFuture[1].name;
-			document.getElementById("track3").innerHTML = unwoundFuture[2].name;
-			document.getElementById("track4").innerHTML = unwoundFuture[3].name;
-			document.getElementById("track5").innerHTML = unwoundFuture[4].name;
-			// document.getElementById("track3").style.backgroundColor = "#f3cf7f";
-			loadTrack(track_index);
+function switchAlbum(playlist, album) {
+	track_list = playlist;
+	document.getElementById("cover").src = album[0];
+	document.getElementById("album-name").innerHTML = album[1];
+	for (let i = 2; i <= playlist.length + 1; i++) {
+		document.getElementById(`track${i - 1}`).innerHTML = album[i].name;
 	}
-	console.log("clicked");
+	loadTrack(track_list.head.musicNode);
 }
 
 function playAudio(id) {
@@ -265,34 +238,33 @@ function playAudio(id) {
 	}
 }
 
-function loadTrack(track_index) {
+function loadTrack(track_list) {
 	// Clear the previous seek timer
 	clearInterval(updateTimer);
 	resetValues();
 
 	// Load a new track
-	curr_track.src = track_list[track_index].path;
+	curr_track.src = track_list.path;
 	curr_track.load();
 
 	// Update details of the track
-	// track_art.style.backgroundImage = "url(" + track_list[track_index].image + ")";
-	track_name.textContent = track_list[track_index].name;
+	track_name.textContent = track_list.name;
 
-	// Set an interval of 1000 milliseconds
-	// for updating the seek slider
+	// Set an interval of 1000 milliseconds for updating the seek slider
 	updateTimer = setInterval(seekUpdate, 1000);
 
-	// Move to the next track if the current finishes playing
-	// using the 'ended' event
+	// Move to the next track if the current finishes playing using the 'ended' event
 	curr_track.addEventListener("ended", nextTrack);
+	// songHighlight(track_index);
+}
 
-	// if (track_index == 0) {
-	// 	querySelector(".track-list :nth-child(0)").style.backgroundColor = "#f3cf7f";
-	// } else if (track_index == 1) {
-	// 	querySelector(".track-list :nth-child(1)").style.backgroundColor = "#f3cf7f";
-	// } else if (track_index == 2) {
-	// 	querySelector(".track-list :nth-child(2)").style.backgroundColor = "#f3cf7f";
-	// }
+function songHighlight(track_index) {
+	document.querySelector(`#track-list li:nth-child(${track_index})`).classList.add("active");
+	if (track_index - 1 != 0)
+		document.querySelector(`#track-list li:nth-child(${track_index - 1})`).classList.remove("active");
+
+	if (track_index + 1 <= 5)
+		document.querySelector(`#track-list li:nth-child(${track_index + 1})`).classList.remove("active");
 }
 
 // Function to reset all values to their default
@@ -328,35 +300,36 @@ function pauseTrack() {
 }
 
 function nextTrack() {
-	// Go back to the first track if the
-	// current one is the last in the track list
-	if (track_index < track_list.length - 1) track_index += 1;
-	else track_index = 0;
+	// Go back to the first track if the current one is the last in the track list
+	if (track_list.tempPos.next != null) {
+		track_update = track_list.traverse(1);
+		track_index++;
+	}
 
 	// Load and play the new track
-	loadTrack(track_index);
+	loadTrack(track_update);
 	playTrack();
 }
 
 function jumpTrack(index) {
-	track_index = index;
-	loadTrack(track_index);
+	track_update = track_list.get(index).musicNode;
+	loadTrack(track_update);
 	playTrack();
 }
 
 function prevTrack() {
-	// Go back to the last track if the
-	// current one is the first in the track list
-	if (track_index > 0) track_index -= 1;
-	else track_index = track_list.length - 1;
+	// Go back to the last track if the current one is the first in the track list
+	if (track_list.tempPos.prev != null) {
+		track_update = track_list.traverse(-1);
+		track_index--;
+	}
 
 	// Load and play the new track
-	loadTrack(track_index);
+	loadTrack(track_update);
 	playTrack();
 }
 function seekTo() {
-	// Calculate the seek position by the
-	// percentage of the seek slider
+	// Calculate the seek position by the percentage of the seek slider
 	// and get the relative duration to the track
 	seekto = curr_track.duration * (seek_slider.value / 100);
 
@@ -398,4 +371,4 @@ function seekUpdate() {
 	}
 }
 
-// loadTrack(track_index);
+loadTrack(track_list.head.musicNode);
