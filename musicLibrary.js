@@ -92,77 +92,77 @@ class DoubleLinkedList {
 //array of data of each album containing album cover image, album title,
 //and name and path of each track
 let curiousVillage = [
-	"/images/curious_village.jpg",
+	"./images/curious_village.jpg",
 	"Professor Layton and the Curious Village",
 	{
 		name: "Professor Layton's Theme (Live)",
-		path: "/audio/Curious_Village/Professor Layton's Theme (Live).mp3",
+		path: "./audio/Curious_Village/Professor Layton's Theme (Live).mp3",
 	},
 	{
 		name: "Puzzles",
-		path: "/audio/Curious_Village/Puzzles.mp3",
+		path: "./audio/Curious_Village/Puzzles.mp3",
 	},
 	{
 		name: "About Town",
-		path: "/audio/Curious_Village/About Town.mp3",
+		path: "./audio/Curious_Village/About Town.mp3",
 	},
 	{
 		name: "The Veil of Night",
-		path: "/audio/Curious_Village/The Veil of Night.mp3",
+		path: "./audio/Curious_Village/The Veil of Night.mp3",
 	},
 	{
 		name: "End Theme",
-		path: "/audio/Curious_Village/End Theme.mp3",
+		path: "./audio/Curious_Village/End Theme.mp3",
 	},
 ];
 
 let diaBox = [
-	"/images/diabolical_box.jpg",
+	"./images/diabolical_box.jpg",
 	"Professor Layton and the Diabolical Box",
 	{
 		name: "Theme of the Diabolical Box",
-		path: "/audio/Diabolical_Box/Theme of the Diabolical Box.mp3",
+		path: "./audio/Diabolical_Box/Theme of the Diabolical Box.mp3",
 	},
 	{
 		name: "Suspense",
-		path: "/audio/Diabolical_Box/Suspense.mp3",
+		path: "./audio/Diabolical_Box/Suspense.mp3",
 	},
 	{
 		name: "Folsense (Live)",
-		path: "/audio/Diabolical_Box/Folsense (Live).mp3",
+		path: "./audio/Diabolical_Box/Folsense (Live).mp3",
 	},
 	{
 		name: "To the Darkness",
-		path: "/audio/Diabolical_Box/To the Darkness.mp3",
+		path: "./audio/Diabolical_Box/To the Darkness.mp3",
 	},
 	{
 		name: "Iris (Music Box Version)",
-		path: "/audio/Diabolical_Box/iris_Music Box.mp3",
+		path: "./audio/Diabolical_Box/iris_Music Box.mp3",
 	},
 ];
 
 let unwoundFuture = [
-	"/images/unwound_future.jpg",
+	"./images/unwound_future.jpg",
 	"Professor Layton and the Unwound Future",
 	{
 		name: "The Lost Future",
-		path: "/audio/Unwound_Future/The Lost Future.mp3",
+		path: "./audio/Unwound_Future/The Lost Future.mp3",
 	},
 	{
 		name: "Puzzle Battle",
-		path: "/audio/Unwound_Future/Puzzle Battle.mp3",
+		path: "./audio/Unwound_Future/Puzzle Battle.mp3",
 	},
 	{
 		name: "Don Paolo's Theme",
-		path: "/audio/Unwound_Future/Don Paolo's Theme.mp3",
+		path: "./audio/Unwound_Future/Don Paolo's Theme.mp3",
 	},
 	{
 		name: "Sorrow",
-		path: "/audio/Unwound_Future/Sorrow.mp3",
+		path: "./audio/Unwound_Future/Sorrow.mp3",
 	},
 	{
 		name: "Time Travel (Japanese)",
-		path: "/audio/Unwound_Future/Time Travel JP.mp3",
+		path: "./audio/Unwound_Future/Time Travel JP.mp3",
 	},
 ];
 
