@@ -1,25 +1,7 @@
-//professor layton music library
 /**
- * Game Series
- * Image
- * Title
- * Song url
- *
- *
- * Spotify library set up
- * album for each game
- * 3 songs each album
- * sidebar nav
- *
  * references: https://www.geeksforgeeks.org/create-a-music-player-using-javascript/
  * https://github.com/OrionJoshi/Music_Player_Using_LinkedList
  */
-
-class Utils {
-	static node(element) {
-		return { element, next: null };
-	}
-}
 
 class Node {
 	constructor(name, path) {
@@ -39,7 +21,6 @@ class DoubleLinkedList {
 		this.length = 0;
 		this.tempPos = null;
 		this.index = 0;
-		this.tempIndex = 0;
 	}
 
 	insert(name, path) {
@@ -57,37 +38,37 @@ class DoubleLinkedList {
 	}
 
 	get(index) {
+		//if index passed in is less than 0 or more than the length of the linked list
+		//or is the same as the current index, return unchanged node
 		if (index < 0 || index >= this.length || index == this.index) {
 			return this.tempPos;
 		} else {
+			//if the index we are looking for is less than the current index
+			//direction goes backwards, else direction of travel goes forwards
 			if (index < this.index) {
 				let counter = this.index;
 				while (counter > index) {
 					this.tempPos = this.tempPos.prev;
 					counter -= 1;
-					console.log(index);
-					console.log(this.tempPos);
+					// console.log(index);
+					// console.log(this.tempPos);
 				}
 			} else {
 				let counter = 0;
 				while (counter < index && this.tempPos.next != null) {
 					this.tempPos = this.tempPos.next;
 					counter += 1;
-					console.log(index);
-					console.log(this.tempPos);
+					// console.log(index);
+					// console.log(this.tempPos);
 				}
 			}
 		}
+		//update current index
 		this.index = index;
 		return this.tempPos;
 	}
 
-	setDefaultPointer() {
-		this.tempPos = this.head;
-	}
-
 	traverse(direction) {
-		// let tempPos;
 		if (direction == 1 && this.tempPos.next != null) {
 			this.tempPos = this.tempPos.next;
 			this.index++;
@@ -102,8 +83,14 @@ class DoubleLinkedList {
 			return 0;
 		}
 	}
+
+	setDefaultPointer() {
+		this.tempPos = this.head;
+	}
 }
 
+//array of data of each album containing album cover image, album title,
+//and name and path of each track
 let curiousVillage = [
 	"/images/curious_village.jpg",
 	"Professor Layton and the Curious Village",
@@ -179,6 +166,7 @@ let unwoundFuture = [
 	},
 ];
 
+//creating a linked list for each album
 const playlist1 = new DoubleLinkedList();
 for (let i = 2; i < curiousVillage.length; i++) {
 	playlist1.insert(curiousVillage[i].name, curiousVillage[i].path);
@@ -208,8 +196,6 @@ let volume_slider = document.querySelector(".volume_slider");
 let curr_time = document.querySelector(".current-time");
 let total_duration = document.querySelector(".total-duration");
 
-// let isPlaying = true;
-
 //global variables
 let track_index = 1;
 let track_update;
@@ -233,16 +219,6 @@ function switchAlbum(playlist, album) {
 	playlist.index = 0;
 }
 
-function playAudio(id) {
-	let song1 = document.getElementById(id);
-	isPlaying = !isPlaying;
-	if (!isPlaying) {
-		song1.play();
-	} else if (isPlaying) {
-		song1.pause();
-	}
-}
-
 function loadTrack(track_list) {
 	// Clear the previous seek timer
 	clearInterval(updateTimer);
@@ -260,6 +236,8 @@ function loadTrack(track_list) {
 
 	// Move to the next track if the current finishes playing using the 'ended' event
 	curr_track.addEventListener("ended", nextTrack);
+
+	//highlight whichever track is currently playing
 	songHighlight(track_index);
 }
 
@@ -284,8 +262,7 @@ function resetValues() {
 }
 
 function playPauseTrack() {
-	// Switch between playing and pausing
-	// depending on the current state
+	// Switch between playing and pausing depending on the current state
 	if (!isPlaying) playTrack();
 	else pauseTrack();
 }
@@ -313,6 +290,8 @@ function nextTrack() {
 	if (track_list.tempPos.next != null) {
 		track_update = track_list.traverse(1);
 		track_index++;
+	} else {
+		jumpTrack(0);
 	}
 
 	// Load and play the new track
@@ -320,6 +299,7 @@ function nextTrack() {
 	playTrack();
 }
 
+//jump to the track that was clicked
 function jumpTrack(index) {
 	track_update = track_list.get(index).musicNode;
 	track_index = index + 1;
@@ -332,6 +312,8 @@ function prevTrack() {
 	if (track_list.tempPos.prev != null) {
 		track_update = track_list.traverse(-1);
 		track_index--;
+	} else {
+		jumpTrack(4);
 	}
 
 	// Load and play the new track
