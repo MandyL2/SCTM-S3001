@@ -57,14 +57,15 @@ class DoubleLinkedList {
 	}
 
 	get(index) {
-		if (index < 0 || index >= this.length) {
-			return null;
+		if (index < 0 || index >= this.length || index == this.index) {
+			return this.tempPos;
 		} else {
 			if (index < this.index) {
 				let counter = this.index;
 				while (counter > index) {
 					this.tempPos = this.tempPos.prev;
 					counter -= 1;
+					console.log(index);
 					console.log(this.tempPos);
 				}
 			} else {
@@ -72,12 +73,13 @@ class DoubleLinkedList {
 				while (counter < index && this.tempPos.next != null) {
 					this.tempPos = this.tempPos.next;
 					counter += 1;
+					console.log(index);
 					console.log(this.tempPos);
 				}
 			}
-			this.index = index;
-			return this.tempPos;
 		}
+		this.index = index;
+		return this.tempPos;
 	}
 
 	setDefaultPointer() {
@@ -225,7 +227,10 @@ function switchAlbum(playlist, album) {
 	for (let i = 2; i <= playlist.length + 1; i++) {
 		document.getElementById(`track${i - 1}`).innerHTML = album[i].name;
 	}
+	track_index = 1;
 	loadTrack(track_list.head.musicNode);
+	pauseTrack();
+	playlist.index = 0;
 }
 
 function playAudio(id) {
@@ -255,7 +260,7 @@ function loadTrack(track_list) {
 
 	// Move to the next track if the current finishes playing using the 'ended' event
 	curr_track.addEventListener("ended", nextTrack);
-	// songHighlight(track_index);
+	songHighlight(track_index);
 }
 
 function songHighlight(track_index) {
@@ -272,6 +277,10 @@ function resetValues() {
 	curr_time.textContent = "00:00";
 	total_duration.textContent = "00:00";
 	seek_slider.value = 0;
+
+	for (let i = 1; i <= 5; i++) {
+		document.querySelector(`#track-list li:nth-child(${i})`).classList.remove("active");
+	}
 }
 
 function playPauseTrack() {
@@ -313,6 +322,7 @@ function nextTrack() {
 
 function jumpTrack(index) {
 	track_update = track_list.get(index).musicNode;
+	track_index = index + 1;
 	loadTrack(track_update);
 	playTrack();
 }
