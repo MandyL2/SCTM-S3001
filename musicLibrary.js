@@ -243,11 +243,8 @@ function loadTrack(track_list) {
 
 function songHighlight(track_index) {
 	document.querySelector(`#track-list li:nth-child(${track_index})`).classList.add("active");
-	if (track_index - 1 != 0)
-		document.querySelector(`#track-list li:nth-child(${track_index - 1})`).classList.remove("active");
-
-	if (track_index + 1 <= 5)
-		document.querySelector(`#track-list li:nth-child(${track_index + 1})`).classList.remove("active");
+	document.querySelector(`#track-list li:nth-child(${track_index}) button`).innerHTML =
+		'<span class="material-symbols-outlined"> pause_circle </span>';
 }
 
 // Function to reset all values to their default
@@ -258,6 +255,8 @@ function resetValues() {
 
 	for (let i = 1; i <= 5; i++) {
 		document.querySelector(`#track-list li:nth-child(${i})`).classList.remove("active");
+		document.querySelector(`#track-list li:nth-child(${i}) button`).innerHTML =
+			'<span class="material-symbols-outlined"> play_circle </span>';
 	}
 }
 
